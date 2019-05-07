@@ -1,0 +1,71 @@
+{
+    "manifestVersion":  1,
+    "id":  "azure-devops-vault-interaction",
+    "name":  "Vault Interaction",
+    "version":  "1.0.0",
+    "publisher":  "Fizcko",
+    "public":  true,
+    "targets":  [
+                    {
+                        "id":  "Microsoft.VisualStudio.Services"
+                    }
+                ],
+    "description":  "This extension provide the ability to interact with HashiCorp Vault.",
+    "categories":  [
+                       "Azure Pipelines"
+                   ],
+    "icons":  {
+                  "default":  "images/extension-icon.png"
+              },
+    "content":  {
+                    "details":  {
+                                    "path":  "overview.md"
+                                }
+                },
+    "links":  {
+                  "license":  {
+                                  "uri":  "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction/blob/master/LICENSE"
+                              },
+                  "repository":  {
+                                     "uri":  "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction"
+                                 },
+                  "support":  {
+                                  "uri":  "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction/issues"
+                              }
+              },
+    "tags":  [
+                 "HashiCorp",
+                 "vault",
+                 "password",
+                 "secrets"
+             ],
+    "repository":  {
+                       "type":  "git",
+                       "uri":  "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction"
+                   },
+    "files":  [
+                  {
+                      "path":  "dist/kv_read"
+                  },
+                  {
+                      "path":  "screenshots",
+                      "addressable":  true
+                  },
+                  {
+                      "path":  "node_modules",
+                      "packagePath":  "dist/kv_read/node_modules"
+                  }
+              ],
+    "contributions":  [
+                          {
+                              "id":  "azure.devops.vault-interaction.kv.read",
+                              "type":  "ms.vss-distributed-task.task",
+                              "targets":  [
+                                              "ms.vss-distributed-task.tasks"
+                                          ],
+                              "properties":  {
+                                                 "name":  "dist/kv_read"
+                                             }
+                          }
+                      ]
+}
