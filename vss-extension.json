@@ -2,7 +2,7 @@
     "manifestVersion":  1,
     "id":  "azure-devops-vault-interaction",
     "name":  "Vault Interaction",
-    "version":  "1.0.0",
+    "version":  "1.1.0",
     "publisher":  "Fizcko",
     "public":  true,
     "targets":  [
@@ -50,10 +50,6 @@
                   {
                       "path":  "screenshots",
                       "addressable":  true
-                  },
-                  {
-                      "path":  "node_modules",
-                      "packagePath":  "dist/kv_read/node_modules"
                   }
               ],
     "contributions":  [
