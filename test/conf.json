@@ -1,0 +1,42 @@
+{
+    "vault": {
+        "url": "https://myurl",
+        "ignore_ssl": false,
+        "login_auth": "clientToken"
+    },
+    "auth": {
+        "approle": {
+            "strRoleID": "",
+            "strSecretID": ""
+        },
+        "azure":{
+            "strRole": "",
+            "strJWT": "",
+            "strSubscriptionID": "",
+            "strResourceGroupName": "",
+            "strVmName": "",
+            "strVmssName": ""
+        },
+        "clientToken":{
+            "strToken": ""
+        },
+        "ldap":{
+            "strUsername": "",
+            "strPassword": ""
+        },
+        "radius":{
+            "strUsername": "",
+            "strPassword": ""
+        },
+        "userpass":{
+            "strUsername": "",
+            "strPassword": ""
+        }
+    },
+    "kv_read": {
+        "strKVEnginePath": "ALM",
+        "kvVersion": "v2",
+        "strSecretPath": "APP1/DEV",
+        "strVariablePrefix": "xxx"
+    }
+}

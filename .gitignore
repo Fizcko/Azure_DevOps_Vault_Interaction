@@ -2,7 +2,7 @@
 node_modules
 **/node_modules
 *.vsix
-**/*.js
-**/*.js.map
+dist/*.js
+dist/*.js.map
 package-lock.json
 **/package-lock.json
