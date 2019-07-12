@@ -1,0 +1,8 @@
+# Add your exclusions
+node_modules
+**/node_modules
+*.vsix
+**/*.js
+**/*.js.map
+package-lock.json
+**/package-lock.json
