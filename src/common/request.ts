@@ -57,6 +57,10 @@ export function requestVault(requestedUrl: string, ignoreCertificateChecks: bool
             case "POST":
                 options.method = "POST";
                 break;
+            case "list":
+            case "LIST":
+                    options.method = "LIST";
+                    break;
             default:
             case "get":
             case "GET":

@@ -11,8 +11,8 @@
                    ],
     "author":  "Fizcko",
     "version":  {
-                    "Major":  1,
-                    "Minor":  1,
+                    "Major":  2,
+                    "Minor":  0,
                     "Patch":  0
                 },
     "instanceNameFormat":  "Vault - Read KV secrets",
@@ -195,9 +195,23 @@
                        "name":  "strSecretPath",
                        "type":  "string",
                        "label":  "Secret path",
-                       "defaultValue":  "my-secret",
+                       "defaultValue":  "/",
+                       "required":  false,
+                       "helpMarkDown":  "Specifies the path of the secrets to read. For a folder exploration add a \u0027/\u0027 at the end of the path.",
+                       "groupName":  "grpKVSettings"
+                   },
+                   {
+                       "name":  "strPrefixType",
+                       "type":  "pickList",
+                       "label":  "Prefix type",
+                       "defaultValue":  "custom",
                        "required":  true,
-                       "helpMarkDown":  "Specifies the path of the secret to read.",
+                       "helpMarkDown":  "Specifies prefix type of the variables. Variables will be named PREFIX_VariableName.",
+                       "options":  {
+                                       "none":  "None",
+                                       "custom":  "Custom",
+                                       "folder":  "Folder path"
+                                   },
                        "groupName":  "grpKVSettings"
                    },
                    {
@@ -205,9 +219,10 @@
                        "type":  "string",
                        "label":  "Variable prefix",
                        "defaultValue":  "",
-                       "required":  true,
+                       "required":  false,
                        "helpMarkDown":  "Specifies prefix of the variables. Variables will be named PREFIX_VariableName.",
-                       "groupName":  "grpKVSettings"
+                       "groupName":  "grpKVSettings",
+                       "visibleRule":  "strPrefixType = custom"
                    }
                ],
     "execution":  {

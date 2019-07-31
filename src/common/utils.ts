@@ -10,9 +10,15 @@ export function exportJSONValues(obj: any, prefix: string): Promise<boolean> {
             var typeArray: string[] =["string", "number", "boolean"];
 
             if (obj instanceof Array) {
+                if(prefix != ""){
+                    prefix = prefix + "_";
+                }
+                else{
+                    prefix = "";
+                }
                 for (var i = 0; i < obj.length; i++) {
                     var element = obj[i];
-                    await exportJSONValues(element, prefix + "_" + i.toString());
+                    await exportJSONValues(element, prefix + i.toString());
                 }
             }
             else if (typeArray.indexOf(typeof obj) > -1){
@@ -22,10 +28,16 @@ export function exportJSONValues(obj: any, prefix: string): Promise<boolean> {
                 tl.setVariable(prefix, objValue, true);
             }
             else{
+                if(prefix != ""){
+                    prefix = prefix + "_";
+                }
+                else{
+                    prefix = "";
+                }
                 for (var key in obj) {
                     if (obj.hasOwnProperty(key)) {
                         var element = obj[key];
-                        await exportJSONValues(element, prefix + "_" + key);
+                        await exportJSONValues(element, prefix + key);
                     }
                 }
             }

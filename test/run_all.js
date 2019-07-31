@@ -15,6 +15,7 @@ describe('azure-devops-vault-interaction', function () {
         
         try {
             assert(tr.succeeded, "Should have succeeded");
+            console.log("STDOUT", tr.stdout);
             done();
         }
         catch (error) {
