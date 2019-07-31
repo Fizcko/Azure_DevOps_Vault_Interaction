@@ -36,7 +36,8 @@
     "kv_read": {
         "strKVEnginePath": "ALM",
         "kvVersion": "v2",
-        "strSecretPath": "APP1/DEV",
+        "strSecretPath": "/",
+        "strPrefixType": "folder",
         "strVariablePrefix": "xxx"
     }
 }
