@@ -52,6 +52,7 @@ tr.setInput("kvVersion", conf.kv_read.kvVersion);
 tr.setInput("strSecretPath", conf.kv_read.strSecretPath);
 tr.setInput("strVariablePrefix", conf.kv_read.strVariablePrefix ? conf.kv_read.strVariablePrefix : "");
 tr.setInput("strPrefixType", conf.kv_read.strPrefixType);
+tr.setInput("strSecretPath", conf.kv_read.strSecretPath ? conf.kv_read.strSecretPath : "");
 
 tr.registerMock('azure-pipelines-task-lib/toolrunner', require('azure-pipelines-task-lib/mock-toolrunner'));
 tr.run();

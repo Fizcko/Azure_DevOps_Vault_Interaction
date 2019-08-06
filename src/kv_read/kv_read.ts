@@ -34,6 +34,7 @@ async function run() {
 			console.log("[INFO] KV version : '" + kvVersion + "'");
 			console.log("[INFO] Secret path : '" + strSecretPath + "'");
 			console.log("[INFO] Variable prefix : '" + strVariablePrefix + "'");
+			console.log(" ");
 
 			if(strSecretPath.match(/.*\/$/)){
 				browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix).then(function(result) {
@@ -178,6 +179,7 @@ async function getSecrets(kvVersion, strUrl, ignoreCertificateChecks, token, str
 				reject(err);
 			}
 
+			console.log(" ");
 			resolve(true);
 
 		}).catch(function(err) {
