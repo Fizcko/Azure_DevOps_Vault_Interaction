@@ -12,6 +12,7 @@ async function run() {
 
 		var strUrl = tl.getInput('strUrl', true);
 		var ignoreCertificateChecks = tl.getBoolInput('ignoreCertificateChecks', true);
+		var strRequestTimeout = tl.getInput('strRequestTimeout', false);
 
 		var strKVEnginePath = tl.getInput('strKVEnginePath', true);
 		var kvVersion = tl.getInput('kvVersion', true);
@@ -25,10 +26,16 @@ async function run() {
 		if(!strVariablePrefix){
 			strVariablePrefix = "";
 		}
+		if(!strRequestTimeout){
+			strRequestTimeout = "";
+		}
+		if(isNaN(Number(strRequestTimeout))){
+			throw new Error("The field 'Request timeout' is not a number.");
+		}
 
 		console.log("[INFO] Vault URL : '" + strUrl + "'");
 
-		getToken().then(async function(token) {
+		getToken(strRequestTimeout).then(async function(token) {
 
 			console.log("[INFO] KV engine path : '" + strKVEnginePath + "'");
 			console.log("[INFO] KV version : '" + kvVersion + "'");
@@ -37,7 +44,7 @@ async function run() {
 			console.log(" ");
 
 			if(strSecretPath.match(/.*\/$/)){
-				browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix).then(function(result) {
+				browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix).then(function(result) {
 					tl.setResult(tl.TaskResult.Succeeded, "Wrapping successfull.");
 				}).catch(function(err) {
 					tl.setResult(tl.TaskResult.Failed, err);
@@ -45,7 +52,7 @@ async function run() {
 				});	
 			}
 			else{
-				getSecrets(kvVersion, strUrl, ignoreCertificateChecks, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix).then(function(result) {
+				getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix).then(function(result) {
 					tl.setResult(tl.TaskResult.Succeeded, "Wrapping successfull.");
 				}).catch(function(err) {
 					tl.setResult(tl.TaskResult.Failed, err);
@@ -66,7 +73,7 @@ async function run() {
 	
 }
 
-async function browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix){
+async function browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix){
 
 	return new Promise(async (resolve, reject) => {
 
@@ -92,7 +99,7 @@ async function browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChe
 
 		console.log("[INFO] Browse engine URL requested : [LIST] '" + listURL + "'");
 
-		requestVault(listURL, ignoreCertificateChecks, token, "LIST", null).then(async function(result) {
+		await requestVault(listURL, ignoreCertificateChecks, strRequestTimeout, token, "LIST", null).then(async function(result) {
 
 			var resultJSON = JSON.parse(result);
 
@@ -106,10 +113,10 @@ async function browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChe
 					
 
 					if(resultJSON.data.keys[i].match(/.*\/$/)){
-						await browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, token, strKVEnginePath, newStrSecretPath, strPrefixType, strVariablePrefix);
+						await browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, newStrSecretPath, strPrefixType, strVariablePrefix);
 					}
 					else{
-						await getSecrets(kvVersion, strUrl, ignoreCertificateChecks, token, strKVEnginePath, newStrSecretPath, strPrefixType, strVariablePrefix);
+						await getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, newStrSecretPath, strPrefixType, strVariablePrefix);
 					}
 				}
 				catch(err){
@@ -126,7 +133,7 @@ async function browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChe
 
 }
 
-async function getSecrets(kvVersion, strUrl, ignoreCertificateChecks, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix){
+async function getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix){
 
 	var getURL = null;
 
@@ -157,7 +164,7 @@ async function getSecrets(kvVersion, strUrl, ignoreCertificateChecks, token, str
 
 	return new Promise(async (resolve, reject) => {
 
-		requestVault(getURL, ignoreCertificateChecks, token, "GET", null).then(async function(result) {
+		requestVault(getURL, ignoreCertificateChecks, strRequestTimeout, token, "GET", null).then(async function(result) {
 
 			var resultJSON = JSON.parse(result);
 

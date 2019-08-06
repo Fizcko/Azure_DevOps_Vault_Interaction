@@ -8,6 +8,7 @@ var tr = new tmrm.TaskMockRunner(taskPath);
 
 tr.setInput("strUrl", conf.vault.url);
 tr.setInput("ignoreCertificateChecks", conf.vault.ignore_ssl);
+tr.setInput("strRequestTimeout", conf.vault.strRequestTimeout ? conf.vault.strRequestTimeout : "");
 
 var strAuthType = process.env["AUTH"];
 
