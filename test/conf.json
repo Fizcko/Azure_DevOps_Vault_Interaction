@@ -2,7 +2,8 @@
     "vault": {
         "url": "https://myurl",
         "ignore_ssl": false,
-        "login_auth": "clientToken"
+        "login_auth": "clientToken",
+		"strSecretPath": "",
     },
     "auth": {
         "approle": {

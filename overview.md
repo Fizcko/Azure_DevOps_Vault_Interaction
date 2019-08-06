@@ -58,6 +58,9 @@
 
 ## Release note
 
+### v2.1.0
+- Add possibility to change the path of an authentication method.
+
 ### v2.0.0
 - The task now can recursively load secrets from a folders and his subfolders. Or just load secrets from a specific path.
 

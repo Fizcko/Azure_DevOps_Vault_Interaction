@@ -120,10 +120,16 @@ export function getToken(): Promise<string> {
 			case "approle":
                 console.log("[INFO] Authentication Method : 'AppRole'");
 
+                var strAuthPath = tl.getInput('strAuthPath', false);
+                var apiURL = "/v1/auth/approle/login";
+                if(strAuthPath){
+                    apiURL = "/v1/auth/" + strAuthPath + "/login";
+                }
+
                 var strRoleID = tl.getInput('strRoleID', true);
                 var strSecretID = tl.getInput('strSecretID', true);
 
-				authUrl = url.resolve(strUrl,'/v1/auth/approle/login');
+				authUrl = url.resolve(strUrl,apiURL);
 				bodyData = JSON.stringify({
 					role_id: strRoleID,
 					secret_id: strSecretID
@@ -131,6 +137,12 @@ export function getToken(): Promise<string> {
                 break;
             case "azure":
                 console.log("[INFO] Authentication Method : 'Azure'");
+
+                var strAuthPath = tl.getInput('strAuthPath', false);
+                var apiURL = "/v1/auth/azure/login";
+                if(strAuthPath){
+                    apiURL = "/v1/auth/" + strAuthPath + "/login";
+                }
 
                 var strRole = tl.getInput('strRole', true);
                 var strJWT = tl.getInput('strJWT', true);
@@ -147,7 +159,7 @@ export function getToken(): Promise<string> {
                 var strVmssName = tl.getInput('strVmssName', false);
                 strVmssName = strVmssName ? strVmssName : "";
                 
-				authUrl = url.resolve(strUrl,'/v1/auth/azure/login');
+				authUrl = url.resolve(strUrl,apiURL);
 				bodyData = JSON.stringify({
 					role: strRole,
 					jwt: strJWT,
@@ -164,27 +176,42 @@ export function getToken(): Promise<string> {
                 break;
             case "ldap":
                 console.log("[INFO] Authentication Method : 'LDAP'");
+                var strAuthPath = tl.getInput('strAuthPath', false);
+                var apiURL = "/v1/auth/ldap/login/";
+                if(strAuthPath){
+                    apiURL = "/v1/auth/" + strAuthPath + "/login/";
+                }
                 var strUsername = tl.getInput('strUsername', true);
 		        var strPassword = tl.getInput('strPassword', true);
-				authUrl = url.resolve(strUrl,'/v1/auth/ldap/login/' + strUsername);
+				authUrl = url.resolve(strUrl,apiURL + strUsername);
 				bodyData = JSON.stringify({
 					password: strPassword
 				});				
                 break;
             case "radius":
                 console.log("[INFO] Authentication Method : 'Radius'");
+                var strAuthPath = tl.getInput('strAuthPath', false);
+                var apiURL = "/v1/auth/radius/login/";
+                if(strAuthPath){
+                    apiURL = "/v1/auth/" + strAuthPath + "/login/";
+                }
                 var strUsername = tl.getInput('strUsername', true);
 		        var strPassword = tl.getInput('strPassword', true);
-				authUrl = url.resolve(strUrl,'/v1/auth/radius/login/' + strUsername);
+				authUrl = url.resolve(strUrl,apiURL + strUsername);
 				bodyData = JSON.stringify({
 					password: strPassword
 				});				
                 break;
             case "userpass":
                 console.log("[INFO] Authentication Method : 'Username & Password'");
+                var strAuthPath = tl.getInput('strAuthPath', false);
+                var apiURL = "/v1/auth/userpass/login/";
+                if(strAuthPath){
+                    apiURL = "/v1/auth/" + strAuthPath + "/login/";
+                }
                 var strUsername = tl.getInput('strUsername', true);
 		        var strPassword = tl.getInput('strPassword', true);
-				authUrl = url.resolve(strUrl,'/v1/auth/userpass/login/' + strUsername);
+				authUrl = url.resolve(strUrl,apiURL + strUsername);
 				bodyData = JSON.stringify({
 					password: strPassword
 				});		
