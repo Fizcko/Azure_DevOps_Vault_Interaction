@@ -1,9 +1,10 @@
 {
     "vault": {
-        "url": "https://myurl",
+        "url": "http://localhost:8200",
         "ignore_ssl": false,
         "login_auth": "clientToken",
-		"strSecretPath": "",
+        "strSecretPath": "",
+        "strRequestTimeout": ""
     },
     "auth": {
         "approle": {

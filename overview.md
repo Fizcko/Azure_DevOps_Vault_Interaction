@@ -58,6 +58,9 @@
 
 ## Release note
 
+### v2.2.0
+- Add possibility to set a timeout value when requesting Vault's API.
+
 ### v2.1.0
 - Add possibility to change the path of an authentication method.
 

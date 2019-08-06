@@ -4,7 +4,7 @@ const http = require('http');
 const https = require("https");
 const Stream = require('stream').Transform;
 
-export function requestVault(requestedUrl: string, ignoreCertificateChecks: boolean, token: string, methode: string, body: string): Promise<string> {
+export function requestVault(requestedUrl: string, ignoreCertificateChecks: boolean, strRequestTimeout: string, token: string, methode: string, body: string): Promise<string> {
     return new Promise((resolve, reject) => {
 
         // Setup options for requests
@@ -49,6 +49,11 @@ export function requestVault(requestedUrl: string, ignoreCertificateChecks: bool
             options.headers  = {
                 "X-Vault-Token": token
             }
+        }
+
+        // Set timeout
+        if(strRequestTimeout){
+            options.timeout = Number(strRequestTimeout);
         }
 
         // Set methode
@@ -106,7 +111,7 @@ export function requestVault(requestedUrl: string, ignoreCertificateChecks: bool
     });
 }
 
-export function getToken(): Promise<string> {
+export function getToken(strRequestTimeout): Promise<string> {
     return new Promise((resolve, reject) => {
 
         var strUrl = tl.getInput('strUrl', true);
@@ -225,7 +230,7 @@ export function getToken(): Promise<string> {
             console.log("[INFO] Starting requesting client token ...");
         }
 
-        requestVault(authUrl, ignoreCertificateChecks, null, "POST", bodyData).then(async function(result) {
+        requestVault(authUrl, ignoreCertificateChecks, strRequestTimeout, null, "POST", bodyData).then(async function(result) {
 
             var resultJSON = JSON.parse(result);
             var token = resultJSON.auth.client_token;
