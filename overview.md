@@ -58,6 +58,9 @@
 
 ## Release note
 
+### v2.3.0
+- Add possibility to replace carriage return by a token in secrets having multilines because Azure Devops do not manage multiline secrets.
+
 ### v2.2.0
 - Add possibility to set a timeout value when requesting Vault's API.
 

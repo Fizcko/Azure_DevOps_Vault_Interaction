@@ -12,7 +12,7 @@
     "author":  "Fizcko",
     "version":  {
                     "Major":  2,
-                    "Minor":  2,
+                    "Minor":  3,
                     "Patch":  0
                 },
     "instanceNameFormat":  "Vault - Read KV secrets",
@@ -242,6 +242,25 @@
                        "helpMarkDown":  "Specifies prefix of the variables. Variables will be named PREFIX_VariableName.",
                        "groupName":  "grpKVSettings",
                        "visibleRule":  "strPrefixType = custom"
+                   },
+                   {
+                       "name":  "replaceCR",
+                       "type":  "boolean",
+                       "label":  "Replace carriage return by a token",
+                       "defaultValue":  "false",
+                       "required":  true,
+                       "helpMarkDown":  "For secrets with multilines you have to replace the carriage return by a token because Azure Devops do not manage multiline secrets",
+                       "groupName":  "grpKVSettings"
+                   },
+                   {
+                       "name":  "strCRPrefix",
+                       "type":  "string",
+                       "label":  "Carriage return token",
+                       "defaultValue":  "",
+                       "required":  true,
+                       "helpMarkDown":  "For secrets with multilines you have to replace the carriage return by a token because Azure Devops do not manage multiline secrets",
+                       "groupName":  "grpKVSettings",
+                       "visibleRule":  "replaceCR = true"
                    }
                ],
     "execution":  {

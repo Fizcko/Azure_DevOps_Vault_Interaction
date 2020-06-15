@@ -1,6 +1,6 @@
 import tl = require('azure-pipelines-task-lib/task');
 
-export function exportJSONValues(obj: any, prefix: string): Promise<boolean> {
+export function exportJSONValues(obj: any, prefix: string, replaceCR: boolean, strCRPrefix: string): Promise<boolean> {
 
     // Source https://raw.githubusercontent.com/geeklearningio/gl-vsts-tasks-variables/master/Common/Node/expandJObject.ts
     return new Promise(async (resolve, reject) => {
@@ -18,14 +18,16 @@ export function exportJSONValues(obj: any, prefix: string): Promise<boolean> {
                 }
                 for (var i = 0; i < obj.length; i++) {
                     var element = obj[i];
-                    await exportJSONValues(element, prefix + i.toString());
+                    await exportJSONValues(element, prefix + i.toString(), replaceCR, strCRPrefix);
                 }
             }
             else if (typeArray.indexOf(typeof obj) > -1){
                 var objValue = typeArray.indexOf(typeof obj)>0 ? obj.toString() : obj;
-                var objDisplayValue = objValue.replace(/./g, "*");
-                console.log("[INFO] Injecting variable : " + prefix + ", value : " + objDisplayValue);
+                if(replaceCR){
+                    objValue = objValue.replace(/(?:\\[rn]|[\r\n])/g,strCRPrefix);
+                }
                 tl.setVariable(prefix, objValue, true);
+                console.log("[INFO] Injecting variable : " + prefix + ", value : " + objValue);
             }
             else{
                 if(prefix != ""){
@@ -37,7 +39,7 @@ export function exportJSONValues(obj: any, prefix: string): Promise<boolean> {
                 for (var key in obj) {
                     if (obj.hasOwnProperty(key)) {
                         var element = obj[key];
-                        await exportJSONValues(element, prefix + key);
+                        await exportJSONValues(element, prefix + key, replaceCR, strCRPrefix);
                     }
                 }
             }

@@ -40,6 +40,8 @@
         "kvVersion": "v2",
         "strSecretPath": "/",
         "strPrefixType": "folder",
-        "strVariablePrefix": "xxx"
+        "strVariablePrefix": "xxx",
+        "replaceCR": false,
+        "strCRPrefix": "<br>"
     }
 }

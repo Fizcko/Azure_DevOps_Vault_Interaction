@@ -19,7 +19,11 @@ async function run() {
 		var strSecretPath = tl.getInput('strSecretPath', false);
 		var strPrefixType = tl.getInput('strPrefixType', true);
 		var strVariablePrefix = tl.getInput('strVariablePrefix', false);
-
+		var replaceCR = tl.getBoolInput('replaceCR', true);
+		
+		if(replaceCR){
+			var strCRPrefix = tl.getInput('strCRPrefix', true);
+		}
 		if(!strSecretPath){
 			strSecretPath = "";
 		}
@@ -41,10 +45,13 @@ async function run() {
 			console.log("[INFO] KV version : '" + kvVersion + "'");
 			console.log("[INFO] Secret path : '" + strSecretPath + "'");
 			console.log("[INFO] Variable prefix : '" + strVariablePrefix + "'");
+			if(replaceCR){
+				console.log("[INFO] All carriage return will be replaced  by: '" + strCRPrefix + "'");
+			}
 			console.log(" ");
 
 			if(strSecretPath.match(/.*\/$/)){
-				browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix).then(function(result) {
+				browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix, replaceCR, strCRPrefix).then(function(result) {
 					tl.setResult(tl.TaskResult.Succeeded, "Wrapping successfull.");
 				}).catch(function(err) {
 					tl.setResult(tl.TaskResult.Failed, err);
@@ -52,7 +59,7 @@ async function run() {
 				});	
 			}
 			else{
-				getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix).then(function(result) {
+				getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix, replaceCR, strCRPrefix).then(function(result) {
 					tl.setResult(tl.TaskResult.Succeeded, "Wrapping successfull.");
 				}).catch(function(err) {
 					tl.setResult(tl.TaskResult.Failed, err);
@@ -73,7 +80,7 @@ async function run() {
 	
 }
 
-async function browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix){
+async function browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix, replaceCR, strCRPrefix){
 
 	return new Promise(async (resolve, reject) => {
 
@@ -113,10 +120,10 @@ async function browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChe
 					
 
 					if(resultJSON.data.keys[i].match(/.*\/$/)){
-						await browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, newStrSecretPath, strPrefixType, strVariablePrefix);
+						await browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, newStrSecretPath, strPrefixType, strVariablePrefix, replaceCR, strCRPrefix);
 					}
 					else{
-						await getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, newStrSecretPath, strPrefixType, strVariablePrefix);
+						await getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, newStrSecretPath, strPrefixType, strVariablePrefix, replaceCR, strCRPrefix);
 					}
 				}
 				catch(err){
@@ -133,7 +140,7 @@ async function browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChe
 
 }
 
-async function getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix){
+async function getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequestTimeout, token, strKVEnginePath, strSecretPath, strPrefixType, strVariablePrefix, replaceCR, strCRPrefix){
 
 	var getURL = null;
 
@@ -171,12 +178,12 @@ async function getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequest
 			try{
 				switch(kvVersion){
 					case "v1":
-						await exportJSONValues(resultJSON.data, strVariablePrefix);
+						await exportJSONValues(resultJSON.data, strVariablePrefix, replaceCR, strCRPrefix);
 						break;
 					case "v2":
 						console.log("[INFO] Secret version : '" + resultJSON.data.metadata.version + "'");
 						console.log("[INFO] Secret creation time : '" + resultJSON.data.metadata.created_time + "'");
-						await exportJSONValues(resultJSON.data.data, strVariablePrefix);
+						await exportJSONValues(resultJSON.data.data, strVariablePrefix, replaceCR, strCRPrefix);
 						break;
 					default:
 						throw new Error("KV version not supported. v1 or v2 are supported.");
