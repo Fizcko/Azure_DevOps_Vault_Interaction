@@ -24,7 +24,7 @@ export function exportJSONValues(obj: any, prefix: string, replaceCR: boolean, s
             else if (typeArray.indexOf(typeof obj) > -1){
                 var objValue = typeArray.indexOf(typeof obj)>0 ? obj.toString() : obj;
                 if(replaceCR){
-                    objValue = objValue.replace(/(?:\\[rn]|[\r\n])/g,strCRPrefix);
+                    objValue = objValue.replace(/(?:\r\n|[\r\n])/g,strCRPrefix);
                 }
                 tl.setVariable(prefix, objValue, true);
                 console.log("[INFO] Injecting variable : " + prefix + ", value : " + objValue);
