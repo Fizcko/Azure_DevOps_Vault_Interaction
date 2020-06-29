@@ -20,6 +20,7 @@ async function run() {
 		var strPrefixType = tl.getInput('strPrefixType', true);
 		var strVariablePrefix = tl.getInput('strVariablePrefix', false);
 		var replaceCR = tl.getBoolInput('replaceCR', true);
+		var strNamespaces = tl.getInput('strNamespaces', false);
 		
 		if(replaceCR){
 			var strCRPrefix = tl.getInput('strCRPrefix', true);
@@ -33,11 +34,17 @@ async function run() {
 		if(!strRequestTimeout){
 			strRequestTimeout = "";
 		}
+		if(!strNamespaces){
+			strNamespaces = "";
+		}
 		if(isNaN(Number(strRequestTimeout))){
 			throw new Error("The field 'Request timeout' is not a number.");
 		}
 
 		console.log("[INFO] Vault URL : '" + strUrl + "'");
+		if(strNamespaces){
+			console.log("[INFO] Namespaces : '" + strNamespaces + "'");
+		}
 
 		getToken(strRequestTimeout).then(async function(token) {
 
