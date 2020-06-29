@@ -58,6 +58,12 @@
 
 ## Release note
 
+### v2.4.0
+- Add possibility to use namespaces (Vault Enterprise).
+
+### v2.3.1
+- Fix Windows carriage return who were replaced twice.
+
 ### v2.3.0
 - Add possibility to replace carriage return by a token in secrets having multilines because Azure Devops do not manage multiline secrets.
 

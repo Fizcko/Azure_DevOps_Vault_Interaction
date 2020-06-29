@@ -2,7 +2,7 @@
     "manifestVersion":  1,
     "id":  "azure-devops-vault-interaction",
     "name":  "Vault Interaction",
-    "version":  "2.3.1",
+    "version":  "2.4.0",
     "publisher":  "Fizcko",
     "public":  true,
     "targets":  [

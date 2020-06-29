@@ -11,6 +11,12 @@ export function requestVault(requestedUrl: string, ignoreCertificateChecks: bool
         var protocol;
         var options = url.parse(requestedUrl);
 
+        var strNamespaces = tl.getInput('strNamespaces', false);
+
+        if(!strNamespaces){
+			strNamespaces = "";
+		}
+
         // Set protocol and port in needed
         switch(options.protocol){
             case "https:":
@@ -71,6 +77,11 @@ export function requestVault(requestedUrl: string, ignoreCertificateChecks: bool
             case "GET":
                 options.method = "GET";
                 break;
+        }
+
+        // Set namespaces
+        if(strNamespaces){
+            options.headers["X-Vault-Namespace"] = strNamespaces
         }
 
         var req = protocol.request(options, (res) => {
