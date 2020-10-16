@@ -56,7 +56,48 @@
 
   There is now four variables called « APP1_DEV_key_1 », « APP1_DEV_key_2 », « APP2_DEV_key_1 », « APP2_DEV_key_2 » that you can used in your next tasks by using $(APP1_DEV_key_1), $(APP1_DEV_key_2), $(APP2_DEV_key_1), $(APP2_DEV_key_2).
 
+
+- ### Tool - Create a File
+
+Provide the ability to create a file and perform an action on his content.
+
+Parameters :
+- **Target directory**: Directory to save the file.
+- **File name**: Name of the file to create (ended by the extension).
+- **File Content**: Content of the file.
+- **Encoding**: Output file encoding. More defails in NodeJS documentation (Buffers and Character Encodings).
+- **Action to perform**: Action to perform on the file content.
+  - Replace token by a new line
+  - Decode from base64
+- **Token to replace**: Define the token to replace by a new line.
+- **New line type**: The type of the new line.
+  - Carriage Return (CR, \r)
+  - Line Feed (LF, \n)
+  - CR followed by LF (CRLF, \r\n)
+
+  ## Use case 1
+
+  A variable loaded by the task « Vault - Read KV secrets » contains a multiline value where the carriage return have been replaced by a token.
+  This variable is named « $(APP2_DEV_key_3) ». The token is « #{rn}# ».
+
+  ![Azure DevOps configuation 3](screenshots/tool_create_file_00.png)
+
+  A file called « myCert.pem » will be created and the token « #{rn}# » will be replaced by a Windows Carriage Return (CRLF).
+
+  ## Use case 2
+
+  A variable loaded by the task « Vault - Read KV secrets » contains a base64 encoded value.
+  This variable is named « $(APP2_DEV_key_4) ».
+
+  ![Azure DevOps configuation 4](screenshots/tool_create_file_01.png)
+
+  A file called « myCert.pem » will be created with the content of decoded from base64.
+
+
 ## Release note
+
+### v2.5.0
+- Add the task « Tool - Create a File ».
 
 ### v2.4.0
 - Add possibility to use namespaces (Vault Enterprise).

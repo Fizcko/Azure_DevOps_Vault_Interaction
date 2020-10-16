@@ -2,7 +2,7 @@
     "manifestVersion":  1,
     "id":  "azure-devops-vault-interaction",
     "name":  "Vault Interaction",
-    "version":  "2.4.0",
+    "version":  "2.5.0",
     "publisher":  "Fizcko",
     "public":  true,
     "targets":  [
@@ -48,6 +48,9 @@
                       "path":  "dist/kv_read"
                   },
                   {
+                      "path":  "dist/tool_create_file"
+                  },
+                  {
                       "path":  "screenshots",
                       "addressable":  true
                   }
@@ -61,6 +64,16 @@
                                           ],
                               "properties":  {
                                                  "name":  "dist/kv_read"
+                                             }
+                          },
+                          {
+                              "id":  "azure.devops.vault-interaction.create.file",
+                              "type":  "ms.vss-distributed-task.task",
+                              "targets":  [
+                                              "ms.vss-distributed-task.tasks"
+                                          ],
+                              "properties":  {
+                                                 "name":  "dist/tool_create_file"
                                              }
                           }
                       ]

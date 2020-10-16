@@ -41,7 +41,16 @@
         "strSecretPath": "/",
         "strPrefixType": "folder",
         "strVariablePrefix": "xxx",
-        "replaceCR": false,
-        "strCRPrefix": "<br>"
-    }
+        "replaceCR": true,
+        "strCRPrefix": "#{rn}#"
+    },
+	"tool_create_file": {
+        "targetDirectory": ".",
+        "targetName": "myCert.pem",
+        "fileContent": "-----BEGIN CERTIFICATE-----#{rn}#MIIF2zCCBMOgAwIBAgIQMj8HjgweXkbwMLVJON0bgTANBgkqhkiG9w0BAQsFADCB#{rn}#pDELMAkGA1UEBhMCVVMxHTAbBgNVBAoTFFN5bWFudGVjIENvcnBvcmF0aW9uMR8w#{rn}#HQYDVQQLExZGT1IgVEVTVCBQVVJQT1NFUyBPTkxZMR8wHQYDVQQLExZTeW1hbnRl#{rn}#YyBUcnVzdCBOZXR3b3JrMTQwMgYDVQQDEytTeW1hbnRlYyBDbGFzcyAzIFNlY3Vy#{rn}#ZSBTZXJ2ZXIgVEVTVCBDQSAtIEc0MB4XDTE2MDYyODAwMDAwMFoXDTE4MDYyOTIz#{rn}#NTk1OVowgZIxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYD#{rn}#VQQHDA1Nb3VudGlhbiBWaWV3MR0wGwYDVQQKDBRTeW1hbnRlYyBDb3Jwb3JhdGlv#{rn}#bjEgMB4GA1UECwwXV1NTIC0gVGVjaG5pY2FsIFN1cHBvcnQxFTATBgNVBAMMDCou#{rn}#YmJ0ZXN0Lm5ldDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANqBKkO6#{rn}#e/P7/PaWFX2dt+drAKhAn/LRDp62EF41aMU/XYnla18b5FzUc2dhEme17Vnv8tX5#{rn}#Brbo/3hr+dqPhJdfr6NbUvvlsBGUrlrpeg1ARHita2cPob7BDP2jQoWDtM36rwZB#{rn}#vkgz7+8BPvZqkiwqyZEe0h0l7dmNozMtt587pfLby86+tfR1rLZHnxw+DLe/+gpp#{rn}#XiHtTMvC6mvGmlouYmX98pb/i2PnyXmoiihSqknwM74oM3zDDG3Lu0w8xCBA9Z//#{rn}#N0rcRGSiebrne01KgfoFREXAMPLEyrC8S0ospuMq0ybMin5Fr07P6nnC+1KblzEM#{rn}#LlRoGP8p48Giw9ECAwEAAEXAMPLEggITMCwGA1UdEQQlMCOCE3d3dy5zdWIxLmJi#{rn}#dGVzdC5uZXSCDCouYmJ0ZEXAMPLEdDAJBgNVHRMEAjAAMA4GA1UdDwEB/wQEAwIF#{rn}#oDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwYQYDVR0gBFowWDBWBgZn#{rn}#gQwBAgIwTDAjBggrBgEFBQcCARYXaHR0cHM6Ly9kLnN5bWNiLmNvbS9jcHMwJQYI#{rn}#KwYBBQUHAgIwGQwXaHR0cHM6Ly9kLnN5bWNiLmNvbS9ycGEwHwYDVR0jBBgwFoAU#{rn}#NI9UtT8KH1K6nLJl7bqLCGcZ4AQwKwYDVR0fBCQwIjAgoB6gHIYaaHR0cDovL3Nz#{rn}#LnN5bWNiLmNvbS9zcy5jcmwwVwYIKwYBBQUHAQEESzBJMB8GCCsGAQUFBzABhhNo#{rn}#dHRwOi8vc3Muc3ltY2QuY29tMCYGCCsGAQUFBzAChhpodHRwOi8vc3Muc3ltY2Iu#{rn}#Y29tL3NzLmNydDASBgMrZU0ECzAJAgECAgEAAgEAMIGKBgorBgEEAdZ5AgQCBHwE#{rn}#egB4AHYAz3GACoQ0AjQYnozSWjcDUvuZ+2fYD8twB2c4YgBqrFkAAAFVl1jMRgAA#{rn}#BAMARzBFAiBctH4rg/vd5UCtnYOaFaXI4HJ6S6Bk8T9GPpHENDP0NAIhANeO/2+h#{rn}#/1aJqPOe5uGfDqipS5wWrUUOaJpU9fuHoDJQMA0GCSqGSIb3DQEBCwUAA4IBAQAu#{rn}#Q/MfYrDQP4PqnzEUoAm6waVZ2hm/3H80sQXDrN1O50ZNvjHNsjzwdCEu1bwFfa6b#{rn}#0b8P4y4nKa4aOl0/mJlq/Awfrx0uC81UIMLwmX2mZ5dbaXHKEZh2tHChnDwhZGPE#{rn}#KVZJ0KxOA12CTRMEOG5XHTe7Yl+wOQWm8h0ky0DY+FMT5AgcCo6IMxMbyyxotQtE#{rn}#/8DmwtZQytA2yqtZWq0765t6PCJSbnK6zp0aLTSwYZVij1BCDMYleiZcDvIN6Jv/#{rn}#ElnDwrxs1CsMwh7zY8wB8gc7GHq63BBW1hCwsDx2guDCEmbJa+ktv7EBz2BgiL6V#{rn}#Zg+QqIFz0YSDQJfFMTi#{rn}#-----END CERTIFICATE-----",
+        "fileEncoding": "utf8",
+        "actionType": "replaceToken",
+        "actionToken": "#{rn}#",
+        "actionNewLineType": "crlf"
+	}
 }

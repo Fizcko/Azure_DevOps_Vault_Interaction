@@ -9,6 +9,7 @@
     },
 	"include": [
         "src/kv_read/*",
+        "src/tool_create_file/*",
         "src/common/*"
     ]
 }

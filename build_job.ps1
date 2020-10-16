@@ -35,6 +35,7 @@ catch{
 # Get sub projects
 $subProjects = $jsonVssConfigFile.contributions
 Foreach ($subProject in $subProjects){
+    $currentProjectName = $subProject.properties.name
     $subProjectPath = Join-Path -Path $rootPath -ChildPath $subProject.properties.name
     $subCommunFolderPath = Join-Path -Path $subProjectPath -ChildPath $commonFolderName
     $pathTaskConfigFile = Join-Path -Path $subProjectPath -ChildPath "task.json"
@@ -89,10 +90,13 @@ Foreach ($subProject in $subProjects){
     }
 
     # Copy common functions
-    if(Test-Path $subCommunFolderPath){
-        Remove-Item -Path "$subCommunFolderPath" -Recurse | Out-Null
+    $excludeFolders = ("dist/tool_create_file")
+    if($currentProjectName -NotIn $excludeFolders){
+        if(Test-Path $subCommunFolderPath){
+            Remove-Item -Path "$subCommunFolderPath" -Recurse | Out-Null
+        }
+        Copy-Item -Path "$pathCommon" -Destination "$subProjectPath" -Recurse -Force
     }
-    Copy-Item -Path "$pathCommon" -Destination "$subProjectPath" -Recurse -Force
 }
 
 # Delete common folder

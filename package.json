@@ -3,7 +3,7 @@
   "scripts": {
     "build": "tsc",
     "postbuild": "powershell -ExecutionPolicy ByPass -Command ./build_job.ps1",
-    "pretest": "",
+    "pretest": "tsc",
     "test": "mocha ./test/run_all.js"
   },
   "dependencies": {
@@ -11,7 +11,7 @@
     "typescript": "3.3.3333"
   },
   "devDependencies": {
-    "@types/node": "^8.10.42",
+    "@types/node": "10.17.39",
     "@types/q": "^1.5.1",
     "mocha": "^6.1.4"
   }
