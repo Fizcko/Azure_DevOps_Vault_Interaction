@@ -12,6 +12,7 @@ async function run() {
 
 		var strUrl = tl.getInput('strUrl', true);
 		var ignoreCertificateChecks = tl.getBoolInput('ignoreCertificateChecks', true);
+		var useProxy = tl.getInput('useProxy', true);
 		var strRequestTimeout = tl.getInput('strRequestTimeout', false);
 
 		var strKVEnginePath = tl.getInput('strKVEnginePath', true);
@@ -24,6 +25,10 @@ async function run() {
 		
 		if(replaceCR){
 			var strCRPrefix = tl.getInput('strCRPrefix', true);
+		}
+		if(useProxy != "none"){
+			var strProxyHost = tl.getInput('strProxyHost', true);
+			var strProxyPort = tl.getInput('strProxyPort', true);
 		}
 		if(!strSecretPath){
 			strSecretPath = "";
@@ -42,6 +47,10 @@ async function run() {
 		}
 
 		console.log("[INFO] Vault URL : '" + strUrl + "'");
+		console.log("[INFO] Use proxy : '" + useProxy + "'");
+		if(useProxy != "none"){
+			console.log("[INFO] Proxy settings : '" + strProxyHost + ":" + strProxyPort + "'");
+		}
 		if(strNamespaces){
 			console.log("[INFO] Namespaces : '" + strNamespaces + "'");
 		}
@@ -73,8 +82,6 @@ async function run() {
 					throw new Error(err);
 				});	
 			}
-
-			
 
 		}).catch(function(err) {
 			tl.setResult(tl.TaskResult.Failed, err);
@@ -113,9 +120,9 @@ async function browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChe
 
 		console.log("[INFO] Browse engine URL requested : [LIST] '" + listURL + "'");
 
-		await requestVault(listURL, ignoreCertificateChecks, strRequestTimeout, token, "LIST", null).then(async function(result) {
+		await requestVault(String(listURL), ignoreCertificateChecks, strRequestTimeout, token, "LIST", null).then(async function(result) {
 
-			var resultJSON = JSON.parse(result);
+			var resultJSON = result;
 
 			for (var i = 0; i < resultJSON.data.keys.length; i++) {
 				try{
@@ -141,7 +148,7 @@ async function browseEngineAndGetSecrets(kvVersion, strUrl, ignoreCertificateChe
 			resolve(true);
 
 		}).catch(function(err) {
-			reject(err);
+			reject("Error during browsing engine. " + err);
 		});
 	});
 
@@ -178,9 +185,9 @@ async function getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequest
 
 	return new Promise(async (resolve, reject) => {
 
-		requestVault(getURL, ignoreCertificateChecks, strRequestTimeout, token, "GET", null).then(async function(result) {
+		requestVault(String(getURL), ignoreCertificateChecks, strRequestTimeout, token, "GET", null).then(async function(result) {
 
-			var resultJSON = JSON.parse(result);
+			var resultJSON = result;
 
 			try{
 				switch(kvVersion){
@@ -204,7 +211,7 @@ async function getSecrets(kvVersion, strUrl, ignoreCertificateChecks, strRequest
 			resolve(true);
 
 		}).catch(function(err) {
-			reject(err);
+			reject("Error when get secrets. " + err);
 		});
 
 	});

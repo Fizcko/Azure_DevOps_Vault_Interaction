@@ -1,14 +1,17 @@
 {
     "vault": {
-        "url": "http://localhost:8200",
-        "ignore_ssl": false,
+        "url": "https://localhost:8200",
+        "ignore_ssl": true,
+        "useProxy": "none",
+        "strProxyHost": "127.0.0.1",
+        "strProxyPort": "8080",
         "login_auth": "clientToken",
         "strRequestTimeout": "",
         "strNamespaces": ""
     },
     "auth": {
         "approle": {
-            "strRoleID": "",
+            "strRoleID": "", 
             "strSecretID": ""
         },
         "azure":{
@@ -20,7 +23,7 @@
             "strVmssName": ""
         },
         "clientToken":{
-            "strToken": ""
+            "strToken": "s.bElwn7hi7IEVipUqFOhHqbFS"
         },
         "ldap":{
             "strUsername": "",

@@ -24,7 +24,7 @@ describe('azure-devops-vault-interaction', function () {
             console.log("STDOUT", tr.stdout);
             done(error);
         }
-    });
+    }).timeout(10000);
     
     it("tool_create_file", (done) => {
 
@@ -43,5 +43,5 @@ describe('azure-devops-vault-interaction', function () {
             console.log("STDOUT", tr.stdout);
             done(error);
         }
-    });
+    }).timeout(10000);
 });

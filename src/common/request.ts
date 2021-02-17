@@ -3,122 +3,119 @@ const url = require('url');
 const http = require('http');
 const https = require("https");
 const Stream = require('stream').Transform;
+const axios = require('axios');
 
 export function requestVault(requestedUrl: string, ignoreCertificateChecks: boolean, strRequestTimeout: string, token: string, methode: string, body: string): Promise<string> {
     return new Promise((resolve, reject) => {
 
-        // Setup options for requests
-        var protocol;
-        var options = url.parse(requestedUrl);
-
         var strNamespaces = tl.getInput('strNamespaces', false);
+        var useProxy = tl.getInput('useProxy', true);
+        if(useProxy != "none"){
+			var strProxyHost = tl.getInput('strProxyHost', true);
+			var strProxyPort = tl.getInput('strProxyPort', true);
+		}
+
+        // Setup options for axios request
+        var options = {};
 
         if(!strNamespaces){
 			strNamespaces = "";
-		}
-
-        // Set protocol and port in needed
-        switch(options.protocol){
-            case "https:":
-                protocol = https;
-                if(!options.port){
-                    options.port = 443;
-                }
-                if(ignoreCertificateChecks){
-                    console.log("[INFO] Ignore certificate checks : 'True'");
-                    options.rejectUnhauthorized = false;
-                    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-                }
-                else{
-                    console.log("[INFO] Ignore certificate checks : 'False'");
-                }
-                break;
-            case "http:":
-                protocol = http;
-                if(!options.port){
-                    options.port = 80;
-                }
-                break;
-            default:
-                reject("Protocol not supported. HTTP or HTTPS are supported.");
         }
+
+        if(useProxy != "none"){
+            options["proxy"] = {
+                protocol: useProxy,
+                host: strProxyHost,
+                port: strProxyPort
+            };
+        }
+
+        options["url"] = String(requestedUrl);
+        
+        var agentHTTP = new http.Agent({ 
+            keepAlive: true 
+        });
+
+        var agentHTTPS = new https.Agent({ 
+            keepAlive: true 
+        });
+
+        if(ignoreCertificateChecks){
+            console.log("[INFO] Ignore certificate checks : 'True'");
+            agentHTTPS = new https.Agent({ 
+                keepAlive: true,
+                rejectUnauthorized: false
+            });
+            process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+        }
+        else{
+            console.log("[INFO] Ignore certificate checks : 'False'");
+        }
+
+        options["httpAgent"] = agentHTTP;
+        options["httpsAgent"] = agentHTTPS;
 
         // Set token in headers
         if(body){
-            options.headers  = {
+            options["data"] = body;
+            options["headers"]  = {
                 'Content-Type': 'application/json',
                 'Content-Length': body.length,
                 "X-Vault-Token": token
             }
         }
         else{
-            options.headers  = {
+            options["headers"]  = {
                 "X-Vault-Token": token
             }
         }
 
         // Set timeout
         if(strRequestTimeout){
-            options.timeout = Number(strRequestTimeout);
+            options["timeout"] = Number(strRequestTimeout);
         }
 
         // Set methode
         switch(methode){
             case "post":
             case "POST":
-                options.method = "POST";
+                options["method"] = "POST";
                 break;
             case "list":
             case "LIST":
-                    options.method = "LIST";
+                options["method"] = "LIST";
                     break;
             default:
             case "get":
             case "GET":
-                options.method = "GET";
+                options["method"] = "GET";
                 break;
         }
 
         // Set namespaces
         if(strNamespaces){
-            options.headers["X-Vault-Namespace"] = strNamespaces
+            options["headers"]["X-Vault-Namespace"] = strNamespaces
         }
 
-        var req = protocol.request(options, (res) => {
+        axios.request(options).then(function (response) {
 
-            var binaryData = new Stream();
-            
-            var statusCode = res.statusCode;
-            
-            res.on('data', function (d) {
-                binaryData.push(d);
-            });
-            
-            res.on('end', function (e) {
+            try{
+                var statusCode = response.status;
+                var content = response.data;
+            } catch (err) {
+                reject("Error when converting JSON return. " + err);
+            }
 
-                try{
-                    var content = JSON.stringify(JSON.parse(binaryData.read()));
-                } catch (err) {
-                    reject("Error when converting JSON return. " + err);
-                }
-                
+            if(parseInt(statusCode) < 200 || parseInt(statusCode) > 299){
+                reject("Error when requesting Vault [" + statusCode + "] : \n" + content);
+            }
 
-                if(parseInt(statusCode) < 200 || parseInt(statusCode) > 299){
-                    reject("Error when requesting Vault [" + statusCode + "] : \n" + content);
-                }
+            resolve(content);
 
-                resolve(content);
-                
-            });
-            
-        }).on('error', function catchError(error) {
-            reject("Error when requesting Vault '" + requestedUrl + "' : " + error);
+        }).catch(function (err) {
+            reject("Error during the request " + err);
         });
-        
-        if(body){
-            req.write(body);
-        }
-        req.end();
+
     });
 }
 
@@ -127,7 +124,7 @@ export function getToken(strRequestTimeout): Promise<string> {
 
         var strUrl = tl.getInput('strUrl', true);
 		var strAuthType = tl.getInput('strAuthType', true);
-		var ignoreCertificateChecks = tl.getBoolInput('ignoreCertificateChecks', true);
+        var ignoreCertificateChecks = tl.getBoolInput('ignoreCertificateChecks', true);
 
         var authUrl = null;
         var bodyData = null;
@@ -243,7 +240,7 @@ export function getToken(strRequestTimeout): Promise<string> {
 
         requestVault(authUrl, ignoreCertificateChecks, strRequestTimeout, null, "POST", bodyData).then(async function(result) {
 
-            var resultJSON = JSON.parse(result);
+            var resultJSON = resultJSON;
             var token = resultJSON.auth.client_token;
             var lease_duration = resultJSON.lease_duration || resultJSON.auth.lease_duration;
 
@@ -253,7 +250,7 @@ export function getToken(strRequestTimeout): Promise<string> {
             resolve(token);
 
         }).catch(function(err) {
-			reject(err);
+			reject("Error when requesting Vault\n" + err);
 		});
 
     });

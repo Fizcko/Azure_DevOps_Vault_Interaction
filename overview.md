@@ -96,6 +96,10 @@ Parameters :
 
 ## Release note
 
+### v3.0.0
+- Use package axios to perform http/https requests.
+- Add possibility to define a proxy for requests.
+
 ### v2.5.0
 - Add the task « Tool - Create a File ».
 

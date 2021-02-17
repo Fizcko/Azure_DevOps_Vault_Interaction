@@ -11,8 +11,8 @@
                    ],
     "author":  "Fizcko",
     "version":  {
-                    "Major":  2,
-                    "Minor":  5,
+                    "Major":  3,
+                    "Minor":  0,
                     "Patch":  0
                 },
     "instanceNameFormat":  "Vault - Read KV secrets",
@@ -51,6 +51,40 @@
                        "required":  true,
                        "helpMarkDown":  "Ignore errors from certificate checks.",
                        "groupName":  "grpServer"
+                   },
+                   {
+                       "name":  "useProxy",
+                       "type":  "radio",
+                       "label":  "Use proxy",
+                       "defaultValue":  "none",
+                       "required":  true,
+                       "options":  {
+                                       "none":  "none",
+                                       "http":  "http",
+                                       "https":  "https"
+                                   },
+                       "helpMarkDown":  "Specifies is the requests have to use a proxy.",
+                       "groupName":  "grpServer"
+                   },
+                   {
+                       "name":  "strProxyHost",
+                       "type":  "string",
+                       "label":  "Host",
+                       "defaultValue":  "",
+                       "required":  true,
+                       "helpMarkDown":  "Hostname or IP address of the proxy.",
+                       "groupName":  "grpServer",
+                       "visibleRule":  "useProxy = http || useProxy = https"
+                   },
+                   {
+                       "name":  "strProxyPort",
+                       "type":  "string",
+                       "label":  "Port",
+                       "defaultValue":  "",
+                       "required":  true,
+                       "helpMarkDown":  "Port of the proxy.",
+                       "groupName":  "grpServer",
+                       "visibleRule":  "useProxy = http || useProxy = https"
                    },
                    {
                        "name":  "strNamespaces",

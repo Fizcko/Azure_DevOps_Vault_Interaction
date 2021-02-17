@@ -1,6 +1,7 @@
 {
   "name": "VaultReadKV",
   "dependencies": {
+    "axios": "0.21.1",
     "azure-pipelines-task-lib": "2.8.0"
   },
   "engines": {

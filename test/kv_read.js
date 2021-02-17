@@ -8,6 +8,9 @@ var tr = new tmrm.TaskMockRunner(taskPath);
 
 tr.setInput("strUrl", conf.vault.url);
 tr.setInput("ignoreCertificateChecks", conf.vault.ignore_ssl);
+tr.setInput("useProxy", conf.vault.useProxy);
+tr.setInput("strProxyHost", conf.vault.strProxyHost);
+tr.setInput("strProxyPort", conf.vault.strProxyPort);
 tr.setInput("strRequestTimeout", conf.vault.strRequestTimeout ? conf.vault.strRequestTimeout : "");
 tr.setInput("strNamespaces", conf.vault.strNamespaces ? conf.vault.strNamespaces : "");
 
