@@ -96,6 +96,10 @@ Parameters :
 
 ## Release note
 
+### v3.0.1
+- Fix bug in token request function.
+- Improvement of the errors messages.
+
 ### v3.0.0
 - Use package axios to perform http/https requests.
 - Add possibility to define a proxy for requests.

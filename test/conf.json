@@ -5,14 +5,14 @@
         "useProxy": "none",
         "strProxyHost": "127.0.0.1",
         "strProxyPort": "8080",
-        "login_auth": "clientToken",
+        "login_auth": "approle",
         "strRequestTimeout": "",
         "strNamespaces": ""
     },
     "auth": {
         "approle": {
-            "strRoleID": "", 
-            "strSecretID": ""
+            "strRoleID": "a6b77f72-d128-f918-1ad7-0859cb7267b4", 
+            "strSecretID": "298284af-0ec0-2d20-772d-e5009f3fc8bff"
         },
         "azure":{
             "strRole": "",

@@ -5,7 +5,7 @@ const https = require("https");
 const Stream = require('stream').Transform;
 const axios = require('axios');
 
-export function requestVault(requestedUrl: string, ignoreCertificateChecks: boolean, strRequestTimeout: string, token: string, methode: string, body: string): Promise<string> {
+export function requestVault(requestedUrl: string, ignoreCertificateChecks: boolean, strRequestTimeout: string, token: string, methode: string, body: string): Promise<any> {
     return new Promise((resolve, reject) => {
 
         var strNamespaces = tl.getInput('strNamespaces', false);
@@ -113,7 +113,7 @@ export function requestVault(requestedUrl: string, ignoreCertificateChecks: bool
             resolve(content);
 
         }).catch(function (err) {
-            reject("Error during the request " + err);
+            reject("Error during the request " + JSON.stringify(err.response.data));
         });
 
     });
@@ -240,7 +240,7 @@ export function getToken(strRequestTimeout): Promise<string> {
 
         requestVault(authUrl, ignoreCertificateChecks, strRequestTimeout, null, "POST", bodyData).then(async function(result) {
 
-            var resultJSON = resultJSON;
+            var resultJSON = result;
             var token = resultJSON.auth.client_token;
             var lease_duration = resultJSON.lease_duration || resultJSON.auth.lease_duration;
 
@@ -250,7 +250,7 @@ export function getToken(strRequestTimeout): Promise<string> {
             resolve(token);
 
         }).catch(function(err) {
-			reject("Error when requesting Vault\n" + err);
+			reject(err);
 		});
 
     });
