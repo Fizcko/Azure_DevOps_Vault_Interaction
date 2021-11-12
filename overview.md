@@ -96,6 +96,9 @@ Parameters :
 
 ## Release note
 
+### v4.0.0
+- Upgrading tasks to Node 10
+
 ### v3.0.1
 - Fix bug in token request function.
 - Improvement of the errors messages.

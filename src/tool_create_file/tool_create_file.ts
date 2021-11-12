@@ -56,7 +56,7 @@ async function run() {
 				actionToPerform = "Replace token";
 				break;
 			case "decodeBase64":
-				finalContent = new Buffer(fileContent, 'base64');
+				finalContent = Buffer.from(fileContent, 'base64');
 				actionToPerform = "Decode from base64";
 				break;
 			default:

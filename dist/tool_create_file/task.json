@@ -11,9 +11,9 @@
                    ],
     "author":  "Fizcko",
     "version":  {
-                    "Major":  3,
+                    "Major":  4,
                     "Minor":  0,
-                    "Patch":  1
+                    "Patch":  0
                 },
     "instanceNameFormat":  "Tool - Create a File",
     "groups":  [
@@ -111,8 +111,8 @@
                    }
                ],
     "execution":  {
-                      "Node":  {
-                                   "target":  "tool_create_file.js"
-                               }
+                      "Node10":  {
+                                     "target":  "tool_create_file.js"
+                                 }
                   }
 }

@@ -113,7 +113,10 @@ export function requestVault(requestedUrl: string, ignoreCertificateChecks: bool
             resolve(content);
 
         }).catch(function (err) {
-            reject("Error during the request " + JSON.stringify(err.response.data));
+            if(err.response && err.response.data)
+                reject("Error during the request " + JSON.stringify(err.response.data));
+            else
+                reject("Error during the request.");
         });
 
     });
