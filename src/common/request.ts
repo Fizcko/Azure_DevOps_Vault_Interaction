@@ -22,7 +22,10 @@ export function requestVault(requestedUrl: string, ignoreCertificateChecks: bool
 			strNamespaces = "";
         }
 
-        if(useProxy != "none"){
+        if(useProxy == "none"){
+            options["proxy"] = false;
+        }        
+        else {
             options["proxy"] = {
                 protocol: useProxy,
                 host: strProxyHost,
