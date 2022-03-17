@@ -96,6 +96,9 @@ Parameters :
 
 ## Release note
 
+### v4.0.1
+- Disable proxy when useProxy is none
+
 ### v4.0.0
 - Upgrading tasks to Node 10
 
