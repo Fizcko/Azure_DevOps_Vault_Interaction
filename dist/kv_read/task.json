@@ -303,6 +303,25 @@
                        "helpMarkDown":  "For secrets with multilines you have to replace the carriage return by a token because Azure Devops do not manage multiline secrets",
                        "groupName":  "grpKVSettings",
                        "visibleRule":  "replaceCR = true"
+                   },
+                   {
+                       "name":  "objectSplit",
+                       "type":  "boolean",
+                       "label":  "Split Arrays/Dict",
+                       "defaultValue":  true,
+                       "required":  true,
+                       "helpMarkDown":  "For secrets stored as a array or dict, this will seperate them via .0 notation OR key.key notation",
+                       "groupName":  "grpKVSettings"
+                   },
+                   {
+                       "name":  "objectSeperator",
+                       "type":  "string",
+                       "label":  "For secrets within a embedded dictionary, this will be used to join the parts together",
+                       "defaultValue":  ".",
+                       "required":  true,
+                       "helpMarkDown":  "For secrets within a embedded dictionary, this will be used to join the parts together using the symbol key.0.test",
+                       "groupName":  "grpKVSettings",
+                       "visibleRule":  "objectSplit = true"
                    }
                ],
     "execution":  {
