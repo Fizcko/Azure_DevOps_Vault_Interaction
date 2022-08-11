@@ -1,10 +1,10 @@
 {
     "manifestVersion":  1,
-    "id":  "azure-devops-vault-interaction",
-    "name":  "Vault Interaction",
-    "version":  "4.0.1",
-    "publisher":  "Fizcko",
-    "public":  true,
+    "id":  "shipbob-vault-interaction",
+    "name":  "ShipBob Vault Interaction",
+    "version":  "1.0.0",
+    "publisher":  "ShipBob",
+    "public":  false,
     "targets":  [
                     {
                         "id":  "Microsoft.VisualStudio.Services"
@@ -24,13 +24,13 @@
                 },
     "links":  {
                   "license":  {
-                                  "uri":  "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction/blob/master/LICENSE"
+                                  "uri":  "https://github.com/chamel-shipbob/Azure_DevOps_Vault_Interaction_Support_Array/blob/master/LICENSE"
                               },
                   "repository":  {
-                                     "uri":  "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction"
+                                     "uri":  "https://github.com/chamel-shipbob/Azure_DevOps_Vault_Interaction_Support_Array"
                                  },
                   "support":  {
-                                  "uri":  "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction/issues"
+                                  "uri":  "https://github.com/chamel-shipbob/Azure_DevOps_Vault_Interaction_Support_Array/issues"
                               }
               },
     "tags":  [
@@ -41,7 +41,7 @@
              ],
     "repository":  {
                        "type":  "git",
-                       "uri":  "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction"
+                       "uri":  "https://github.com/chamel-shipbob/Azure_DevOps_Vault_Interaction_Support_Array"
                    },
     "files":  [
                   {
@@ -57,7 +57,7 @@
               ],
     "contributions":  [
                           {
-                              "id":  "azure.devops.vault-interaction.kv.read",
+                              "id":  "azure.devops.shipbob-vault-interaction.kv.read",
                               "type":  "ms.vss-distributed-task.task",
                               "targets":  [
                                               "ms.vss-distributed-task.tasks"
@@ -67,7 +67,7 @@
                                              }
                           },
                           {
-                              "id":  "azure.devops.vault-interaction.create.file",
+                              "id":  "azure.devops.shipbob-vault-interaction.create.file",
                               "type":  "ms.vss-distributed-task.task",
                               "targets":  [
                                               "ms.vss-distributed-task.tasks"

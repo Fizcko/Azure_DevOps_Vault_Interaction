@@ -1,7 +1,7 @@
 {
-    "id":  "807A85D5-8AC9-4B8C-A0FC-1B233BB2BCC6",
-    "name":  "VaultReadKV",
-    "friendlyName":  "Vault - Read KV secrets",
+    "id":  "6DCA60C1-8228-4C03-BF8F-64DC561A337D",
+    "name":  "ShipBoBVaultReadKV",
+    "friendlyName":  "ShipBob Vault - Read KV secrets",
     "description":  "This extension provide the ability to read KV secrets from HashiCorp Vault and load them into variables.",
     "helpMarkDown":  "",
     "category":  "Utility",
@@ -9,13 +9,13 @@
                        "Build",
                        "Release"
                    ],
-    "author":  "Fizcko",
+    "author":  "ShipBob",
     "version":  {
                     "Major":  4,
                     "Minor":  0,
                     "Patch":  1
                 },
-    "instanceNameFormat":  "Vault - Read KV secrets",
+    "instanceNameFormat":  "ShipBob Vault - Read KV secrets",
     "groups":  [
                    {
                        "name":  "grpServer",

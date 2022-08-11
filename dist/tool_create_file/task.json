@@ -1,7 +1,7 @@
 {
-    "id":  "81152B68-7A9D-4471-8579-4CDA672AC509",
-    "name":  "ToolCreateFile",
-    "friendlyName":  "Tool - Create a File",
+    "id":  "1C109440-057D-4178-BB36-C1FF343C3584",
+    "name":  "ShipBobToolCreateFile",
+    "friendlyName":  "ShipBoB Tool - Create a File",
     "description":  "Provide the ability to create a file and perform an action on his content.",
     "helpMarkDown":  "",
     "category":  "Utility",
@@ -9,7 +9,7 @@
                        "Build",
                        "Release"
                    ],
-    "author":  "Fizcko",
+    "author":  "ShipBob",
     "version":  {
                     "Major":  4,
                     "Minor":  0,
