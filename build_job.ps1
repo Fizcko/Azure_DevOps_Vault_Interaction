@@ -88,19 +88,7 @@ Foreach ($subProject in $subProjects){
         Write-Error "[ERROR] $($_.Exception.Message)"
         exit
     }
-
-    # Copy common functions
-    $excludeFolders = ("dist/tool_create_file")
-    if($currentProjectName -NotIn $excludeFolders){
-        if(Test-Path $subCommunFolderPath){
-            Remove-Item -Path "$subCommunFolderPath" -Recurse | Out-Null
-        }
-        Copy-Item -Path "$pathCommon" -Destination "$subProjectPath" -Recurse -Force
-    }
 }
-
-# Delete common folder
-Remove-Item -Path "$pathCommon" -Recurse -Force
 
 # Start build
 Set-Location $rootPath
