@@ -47,7 +47,7 @@
         "replaceCR": true,
         "strCRPrefix": "#{rn}#",
         "objectSplit": false,
-        "objectSeperator": ","
+        "objectSeperator": "."
     },
 	"tool_create_file": {
         "targetDirectory": ".",

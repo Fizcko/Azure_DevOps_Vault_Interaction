@@ -13,7 +13,7 @@ export function exportJSONValues(obj: any, prefix: string, keyName: string, repl
             if (obj instanceof Array && objectSplit) {
                 for (var i = 0; i < obj.length; i++) {
                     var element = obj[i];
-                    if (keyName == null){
+                    if (keyName == null || keyName == ""){
                         await exportJSONValues(element, prefix,i.toString(), replaceCR, strCRPrefix, objectSplit, objectSeperator);
                     } else {
                         await exportJSONValues(element, prefix,[keyName,i.toString()].join(objectSeperator), replaceCR, strCRPrefix, objectSplit, objectSeperator);
@@ -46,13 +46,28 @@ export function exportJSONValues(obj: any, prefix: string, keyName: string, repl
                 console.log("[INFO] Injecting variable : " + keyName + ", value : " + objValue);
             }
             else{
-                for (var key in obj) {
-                    if (obj.hasOwnProperty(key)) {
-                        var element = obj[key];
-                        if (keyName == null){
-                            await exportJSONValues(element, prefix,key, replaceCR, strCRPrefix, objectSplit, objectSeperator);
-                        } else {
-                            await exportJSONValues(element, prefix,[keyName,key].join(objectSeperator), replaceCR, strCRPrefix, objectSplit, objectSeperator);
+                if ((keyName != null && keyName != "") && !objectSplit ){
+                    // add prefix to keyName on start if prefix is not null
+                    if(prefix != ""){
+                        keyName = prefix + "_" + keyName;
+                    }
+                    var jsonObjectValue = JSON.stringify(obj);
+                    if(replaceCR){
+                        objValue = jsonObjectValue.replace(/(?:\r\n|[\r\n])/g,strCRPrefix);
+                    }
+                    tl.setVariable(keyName, jsonObjectValue, true);
+                    console.log("[INFO] Injecting variable : " + keyName + ", value : " + jsonObjectValue);
+
+                }
+                else {
+                    for (var key in obj) {
+                        if (obj.hasOwnProperty(key)) {
+                            var element = obj[key];
+                            if (keyName == null || keyName == ""){
+                                await exportJSONValues(element, prefix,key, replaceCR, strCRPrefix, objectSplit, objectSeperator);
+                            } else {
+                                await exportJSONValues(element, prefix,[keyName,key].join(objectSeperator), replaceCR, strCRPrefix, objectSplit, objectSeperator);
+                            }
                         }
                     }
                 }
