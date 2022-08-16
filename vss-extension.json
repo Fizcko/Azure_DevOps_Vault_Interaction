@@ -1,80 +1,80 @@
 {
-    "manifestVersion":  1,
-    "id":  "shipbob-vault-interaction",
-    "name":  "ShipBob Vault Interaction",
-    "version":  "1.0.3",
-    "publisher":  "ShipBob",
-    "public":  false,
-    "targets":  [
-                    {
-                        "id":  "Microsoft.VisualStudio.Services"
-                    }
-                ],
-    "description":  "This extension provide the ability to interact with HashiCorp Vault.",
-    "categories":  [
-                       "Azure Pipelines"
-                   ],
-    "icons":  {
-                  "default":  "images/extension-icon.png"
-              },
-    "content":  {
-                    "details":  {
-                                    "path":  "overview.md"
-                                }
-                },
-    "links":  {
-                  "license":  {
-                                  "uri":  "https://github.com/chamel-shipbob/Azure_DevOps_Vault_Interaction_Support_Array/blob/master/LICENSE"
-                              },
-                  "repository":  {
-                                     "uri":  "https://github.com/chamel-shipbob/Azure_DevOps_Vault_Interaction_Support_Array"
-                                 },
-                  "support":  {
-                                  "uri":  "https://github.com/chamel-shipbob/Azure_DevOps_Vault_Interaction_Support_Array/issues"
-                              }
-              },
-    "tags":  [
-                 "HashiCorp",
-                 "vault",
-                 "password",
-                 "secrets"
-             ],
-    "repository":  {
-                       "type":  "git",
-                       "uri":  "https://github.com/chamel-shipbob/Azure_DevOps_Vault_Interaction_Support_Array"
-                   },
-    "files":  [
-                  {
-                      "path":  "dist/kv_read"
-                  },
-                  {
-                      "path":  "dist/tool_create_file"
-                  },
-                  {
-                      "path":  "screenshots",
-                      "addressable":  true
-                  }
-              ],
-    "contributions":  [
-                          {
-                              "id":  "azure.devops.shipbob-vault-interaction.kv.read",
-                              "type":  "ms.vss-distributed-task.task",
-                              "targets":  [
-                                              "ms.vss-distributed-task.tasks"
-                                          ],
-                              "properties":  {
-                                                 "name":  "dist/kv_read"
-                                             }
-                          },
-                          {
-                              "id":  "azure.devops.shipbob-vault-interaction.create.file",
-                              "type":  "ms.vss-distributed-task.task",
-                              "targets":  [
-                                              "ms.vss-distributed-task.tasks"
-                                          ],
-                              "properties":  {
-                                                 "name":  "dist/tool_create_file"
-                                             }
-                          }
-                      ]
+    "manifestVersion": 1,
+    "id": "azure-devops-vault-interaction",
+    "name": "Vault Interaction",
+    "version": "4.0.1",
+    "publisher": "Fizcko",
+    "public": true,
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "This extension provide the ability to interact with HashiCorp Vault.",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/extension-icon.png"
+    },
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "links": {
+        "license": {
+            "uri": "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction/blob/master/LICENSE"
+        },
+        "repository": {
+            "uri": "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction"
+        },
+        "support": {
+            "uri": "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction/issues"
+        }
+    },
+    "tags": [
+        "HashiCorp",
+        "vault",
+        "password",
+        "secrets"
+    ],
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/Fizcko/Azure_DevOps_Vault_Interaction"
+    },
+    "files": [
+        {
+            "path": "dist/kv_read"
+        },
+        {
+            "path": "dist/tool_create_file"
+        },
+        {
+            "path": "screenshots",
+            "addressable": true
+        }
+    ],
+    "contributions": [
+        {
+            "id": "azure.devops.vault-interaction.kv.read",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "dist/kv_read"
+            }
+        },
+        {
+            "id": "azure.devops.vault-interaction.create.file",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "dist/tool_create_file"
+            }
+        }
+    ]
 }
