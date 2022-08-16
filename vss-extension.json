@@ -2,7 +2,7 @@
     "manifestVersion":  1,
     "id":  "shipbob-vault-interaction",
     "name":  "ShipBob Vault Interaction",
-    "version":  "1.0.0",
+    "version":  "1.0.3",
     "publisher":  "ShipBob",
     "public":  false,
     "targets":  [
