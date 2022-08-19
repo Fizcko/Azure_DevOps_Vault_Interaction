@@ -45,7 +45,9 @@
         "strPrefixType": "folder",
         "strVariablePrefix": "xxx",
         "replaceCR": true,
-        "strCRPrefix": "#{rn}#"
+        "strCRPrefix": "#{rn}#",
+        "objectSplit": false,
+        "objectSeperator": "."
     },
 	"tool_create_file": {
         "targetDirectory": ".",

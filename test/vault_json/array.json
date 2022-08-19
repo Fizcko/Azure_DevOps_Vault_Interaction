@@ -1,0 +1,28 @@
+{
+    "test": [
+        "test value",
+        1,
+        2,
+        3,
+        4
+    ],
+    "test2": [
+        "tree"
+    ],
+    "embedded": [
+        [
+            0,
+            2
+        ],
+        [
+            1,
+            2
+        ]
+    ],
+    "embeddedDict": [
+        {
+            "foo": "bar",
+            "one": 2
+        }
+    ]
+}
