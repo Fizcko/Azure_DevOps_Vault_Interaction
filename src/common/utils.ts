@@ -27,7 +27,7 @@ export function exportJSONValues(obj: any, prefix: string, replaceCR: boolean, s
                     objValue = objValue.replace(/(?:\r\n|[\r\n])/g,strCRPrefix);
                 }
                 tl.setVariable(prefix, objValue, true);
-                console.log("[INFO] Injecting variable : " + prefix + ", value : " + objValue);
+                console.log("[INFO] Injecting variable : " + prefix);
             }
             else{
                 if(prefix != ""){

@@ -96,6 +96,9 @@ Parameters :
 
 ## Release note
 
+### v4.0.2
+- Remove secret value from output log
+
 ### v4.0.1
 - Disable proxy when useProxy is none
 
