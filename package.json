@@ -13,6 +13,7 @@
   "devDependencies": {
     "@types/node": "10.17.39",
     "@types/q": "^1.5.1",
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "tfx-cli": "0.8.1"
   }
 }

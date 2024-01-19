@@ -11,9 +11,9 @@
                    ],
     "author":  "Fizcko",
     "version":  {
-                    "Major":  4,
+                    "Major":  5,
                     "Minor":  0,
-                    "Patch":  2
+                    "Patch":  0
                 },
     "instanceNameFormat":  "Tool - Create a File",
     "groups":  [

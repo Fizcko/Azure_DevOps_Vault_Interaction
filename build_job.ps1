@@ -36,6 +36,11 @@ catch{
 $subProjects = $jsonVssConfigFile.contributions
 Foreach ($subProject in $subProjects){
     $currentProjectName = $subProject.properties.name
+
+    if ($currentProjectName -eq "VaultInteractionEndpoint") {
+        continue
+    }
+
     $subProjectPath = Join-Path -Path $rootPath -ChildPath $subProject.properties.name
     $subCommunFolderPath = Join-Path -Path $subProjectPath -ChildPath $commonFolderName
     $pathTaskConfigFile = Join-Path -Path $subProjectPath -ChildPath "task.json"
@@ -104,4 +109,4 @@ Remove-Item -Path "$pathCommon" -Recurse -Force
 
 # Start build
 Set-Location $rootPath
-tfx extension create --manifest-globs vss-extension.json
+npx tfx extension create --manifest-globs vss-extension.json

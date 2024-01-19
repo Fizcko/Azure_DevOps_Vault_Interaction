@@ -128,8 +128,22 @@ export function requestVault(requestedUrl: string, ignoreCertificateChecks: bool
 export function getToken(strRequestTimeout): Promise<string> {
     return new Promise((resolve, reject) => {
 
-        var strUrl = tl.getInput('strUrl', true);
+        var strUrl;
+        var serverEndpointAuth;
+        var overloadFromServiceConnection = false;
+
 		var strAuthType = tl.getInput('strAuthType', true);
+        
+		if(strAuthType == "serviceConnection"){
+			var serviceConnectionValues = tl.getInput('serviceConnectionName',true);
+			strUrl = tl.getEndpointUrl(serviceConnectionValues, false);
+            serverEndpointAuth = tl.getEndpointAuthorization(serviceConnectionValues, false);
+            strAuthType = serverEndpointAuth["parameters"]["authType"];
+            overloadFromServiceConnection = true;
+		}
+		else{
+			strUrl = tl.getInput('strUrl', true);
+		}
         var ignoreCertificateChecks = tl.getBoolInput('ignoreCertificateChecks', true);
 
         var authUrl = null;
@@ -145,8 +159,17 @@ export function getToken(strRequestTimeout): Promise<string> {
                     apiURL = "/v1/auth/" + strAuthPath + "/login";
                 }
 
-                var strRoleID = tl.getInput('strRoleID', true);
-                var strSecretID = tl.getInput('strSecretID', true);
+                var strRoleID;
+                var strSecretID;
+
+                if(overloadFromServiceConnection){
+                    strRoleID = serverEndpointAuth["parameters"]["username"];
+                    strSecretID = serverEndpointAuth["parameters"]["password"];
+                }
+                else{
+                    strRoleID = tl.getInput('strRoleID', true);
+                    strSecretID = tl.getInput('strSecretID', true);
+                }
 
 				authUrl = url.resolve(strUrl,apiURL);
 				bodyData = JSON.stringify({
@@ -190,7 +213,15 @@ export function getToken(strRequestTimeout): Promise<string> {
                 break;
             case "clientToken":
                 console.log("[INFO] Authentication Method : 'Client Token'");
-                var strToken = tl.getInput('strToken', true);
+
+                var strToken;
+
+                if(overloadFromServiceConnection){
+                    strToken = serverEndpointAuth["parameters"]["password"];
+                }
+                else{
+                    strToken = tl.getInput('strToken', true);
+                }
                 resolve(strToken);
                 break;
             case "ldap":
@@ -200,8 +231,19 @@ export function getToken(strRequestTimeout): Promise<string> {
                 if(strAuthPath){
                     apiURL = "/v1/auth/" + strAuthPath + "/login/";
                 }
-                var strUsername = tl.getInput('strUsername', true);
-		        var strPassword = tl.getInput('strPassword', true);
+
+                var strUsername;
+                var strPassword;
+
+                if(overloadFromServiceConnection){
+                    strUsername = serverEndpointAuth["parameters"]["username"];
+                    strPassword = serverEndpointAuth["parameters"]["password"];
+                }
+                else{
+                    strUsername = tl.getInput('strUsername', true);
+                    strPassword = tl.getInput('strPassword', true);
+                }
+
 				authUrl = url.resolve(strUrl,apiURL + strUsername);
 				bodyData = JSON.stringify({
 					password: strPassword
@@ -214,8 +256,19 @@ export function getToken(strRequestTimeout): Promise<string> {
                 if(strAuthPath){
                     apiURL = "/v1/auth/" + strAuthPath + "/login/";
                 }
-                var strUsername = tl.getInput('strUsername', true);
-		        var strPassword = tl.getInput('strPassword', true);
+                
+                var strUsername;
+                var strPassword;
+
+                if(overloadFromServiceConnection){
+                    strUsername = serverEndpointAuth["parameters"]["username"];
+                    strPassword = serverEndpointAuth["parameters"]["password"];
+                }
+                else{
+                    strUsername = tl.getInput('strUsername', true);
+                    strPassword = tl.getInput('strPassword', true);
+                }
+
 				authUrl = url.resolve(strUrl,apiURL + strUsername);
 				bodyData = JSON.stringify({
 					password: strPassword
@@ -228,8 +281,19 @@ export function getToken(strRequestTimeout): Promise<string> {
                 if(strAuthPath){
                     apiURL = "/v1/auth/" + strAuthPath + "/login/";
                 }
-                var strUsername = tl.getInput('strUsername', true);
-		        var strPassword = tl.getInput('strPassword', true);
+                
+                var strUsername;
+                var strPassword;
+
+                if(overloadFromServiceConnection){
+                    strUsername = serverEndpointAuth["parameters"]["username"];
+                    strPassword = serverEndpointAuth["parameters"]["password"];
+                }
+                else{
+                    strUsername = tl.getInput('strUsername', true);
+                    strPassword = tl.getInput('strPassword', true);
+                }
+                
 				authUrl = url.resolve(strUrl,apiURL + strUsername);
 				bodyData = JSON.stringify({
 					password: strPassword

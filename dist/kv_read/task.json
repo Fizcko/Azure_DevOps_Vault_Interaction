@@ -11,9 +11,9 @@
                    ],
     "author":  "Fizcko",
     "version":  {
-                    "Major":  4,
+                    "Major":  5,
                     "Minor":  0,
-                    "Patch":  2
+                    "Patch":  0
                 },
     "instanceNameFormat":  "Vault - Read KV secrets",
     "groups":  [
@@ -35,12 +35,31 @@
                ],
     "inputs":  [
                    {
+                       "name":  "strAuthType",
+                       "type":  "pickList",
+                       "label":  "Authentication Method",
+                       "defaultValue":  "clientToken",
+                       "required":  true,
+                       "helpMarkDown":  "Specifies the authentication method.",
+                       "options":  {
+                                       "approle":  "AppRole",
+                                       "azure":  "Azure",
+                                       "clientToken":  "Client Token",
+                                       "ldap":  "LDAP",
+                                       "radius":  "Radius",
+                                       "serviceConnection":  "Service connection",
+                                       "userpass":  "Username \u0026 Password"
+                                   },
+                       "groupName":  "grpServer"
+                   },
+                   {
                        "name":  "strUrl",
                        "type":  "string",
                        "label":  "Vault URL",
                        "defaultValue":  "https://myurl",
                        "required":  true,
                        "helpMarkDown":  "Specifies the url of the Vault server (http or https).",
+                       "visibleRule":  "strAuthType != serviceConnection",
                        "groupName":  "grpServer"
                    },
                    {
@@ -104,21 +123,12 @@
                        "groupName":  "grpServer"
                    },
                    {
-                       "name":  "strAuthType",
-                       "type":  "pickList",
-                       "label":  "Authentication Method",
-                       "defaultValue":  "clientToken",
+                       "name":  "serviceConnectionName",
+                       "type":  "connectedService:VaultInteractionEndpoint",
+                       "label":  "Vault Interaction Service Connection",
                        "required":  true,
-                       "helpMarkDown":  "Specifies the authentication method.",
-                       "options":  {
-                                       "approle":  "AppRole",
-                                       "azure":  "Azure",
-                                       "clientToken":  "Client Token",
-                                       "ldap":  "LDAP",
-                                       "radius":  "Radius",
-                                       "userpass":  "Username \u0026 Password"
-                                   },
-                       "groupName":  "grpAuth"
+                       "groupName":  "grpAuth",
+                       "visibleRule":  "strAuthType = serviceConnection"
                    },
                    {
                        "name":  "strAuthPath",

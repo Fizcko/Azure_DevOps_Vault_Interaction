@@ -3,12 +3,14 @@
 
 ## Authentication methods available
 
-  - AppRole
+  - AppRole *
   - Azure
-  - Client Token
-  - LDAP
-  - Radius
-  - Username & Password
+  - Client Token *
+  - LDAP *
+  - Radius *
+  - Username & Password *
+  
+\* Available to setup in a service connection
 
 ## Utilities
 
@@ -96,11 +98,15 @@ Parameters :
 
 ## Release note
 
+### v5.0.0
+- Add service connection « Vault Interaction »
+  This allows you to set the Vault URL and Authentication methods (AppRole, Client Token, LDAP, Radius, Username & Password) directly in a service connection.
+
 ### v4.0.2
-- Remove secret value from output log
+- Remove secret value from output log.
 
 ### v4.0.1
-- Disable proxy when useProxy is none
+- Disable proxy when useProxy is none.
 
 ### v4.0.0
 - Upgrading tasks to Node 10

@@ -10,7 +10,16 @@ async function run() {
 
 		tl.setResourcePath(path.join(__dirname, 'task.json'));
 
-		var strUrl = tl.getInput('strUrl', true);
+		var strUrl;
+		var strAuthType = tl.getInput('strAuthType', true);
+		if(strAuthType == "serviceConnection"){
+			var serviceConnectionValues = tl.getInput('serviceConnectionName',true);
+			strUrl = tl.getEndpointUrl(serviceConnectionValues, false);
+		}
+		else{
+			strUrl = tl.getInput('strUrl', true);
+		}
+
 		var ignoreCertificateChecks = tl.getBoolInput('ignoreCertificateChecks', true);
 		var useProxy = tl.getInput('useProxy', true);
 		var strRequestTimeout = tl.getInput('strRequestTimeout', false);
