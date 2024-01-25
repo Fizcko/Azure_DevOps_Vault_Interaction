@@ -141,7 +141,7 @@ Parameters :
 ## Release note
 
 ### v5.1.0
-- Add the possibility to export Services Connexion settings as output variables.
+- Add the possibility to export Services Connection settings as output variables.
   Check [Use output variables from the Service Connection](#Use-output-variables-from-the-Service-Connection) for more details.
 
 ### v5.0.0
