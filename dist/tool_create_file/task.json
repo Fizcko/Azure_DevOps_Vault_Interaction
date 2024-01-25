@@ -12,7 +12,7 @@
     "author":  "Fizcko",
     "version":  {
                     "Major":  5,
-                    "Minor":  0,
+                    "Minor":  1,
                     "Patch":  0
                 },
     "instanceNameFormat":  "Tool - Create a File",

@@ -12,7 +12,7 @@
     "author":  "Fizcko",
     "version":  {
                     "Major":  5,
-                    "Minor":  0,
+                    "Minor":  1,
                     "Patch":  0
                 },
     "instanceNameFormat":  "Vault - Read KV secrets",
@@ -50,6 +50,16 @@
                                        "serviceConnection":  "Service connection",
                                        "userpass":  "Username \u0026 Password"
                                    },
+                       "groupName":  "grpServer"
+                   },
+                   {
+                       "name":  "exportServiceConnectionSettings",
+                       "type":  "boolean",
+                       "label":  "Export Service connection settings as output variables",
+                       "defaultValue":  "false",
+                       "required":  true,
+                       "helpMarkDown":  "The settings (url, username, password) of the Service connection will be exported as output variables (accessible in all stages).",
+                       "visibleRule":  "strAuthType == serviceConnection",
                        "groupName":  "grpServer"
                    },
                    {

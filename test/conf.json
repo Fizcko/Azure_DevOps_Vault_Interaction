@@ -1,11 +1,11 @@
 {
     "vault": {
-        "url": "https://localhost:8200",
+        "url": "http://127.0.0.1:8200",
         "ignore_ssl": true,
         "useProxy": "none",
         "strProxyHost": "127.0.0.1",
         "strProxyPort": "8080",
-        "login_auth": "approle",
+        "login_auth": "clientToken",
         "strRequestTimeout": "",
         "strNamespaces": ""
     },
@@ -23,7 +23,7 @@
             "strVmssName": ""
         },
         "clientToken":{
-            "strToken": "s.bElwn7hi7IEVipUqFOhHqbFS"
+            "strToken": "hvs.qoxQZXZGSYSyXhWEcfUitsRH"
         },
         "ldap":{
             "strUsername": "",
@@ -36,7 +36,14 @@
         "userpass":{
             "strUsername": "",
             "strPassword": ""
-        }
+        },
+		"serviceConnection":{
+			"url": "http://127.0.0.1:8200",
+			"authType": "clientToken",
+			"username": "random",
+			"password": "hvs.qoxQZXZGSYSyXhWEcfUitsRH",
+			"exportServiceConnectionSettings": true
+		}
     },
     "kv_read": {
         "strKVEnginePath": "ALM",

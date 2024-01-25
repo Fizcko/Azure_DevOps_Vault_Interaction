@@ -20,9 +20,10 @@
 
   ## <span style="color:red">Note</span>  
 
-  The field « Secret path » have to ends with a « / » if you want to discover secrets across current folder and his subfolders.
+  - The field « Secret path » have to ends with a « / » if you want to discover secrets across current folder and his subfolders.
   See [Use case 2](#Use-case-2).
   In discovery mode if the « Prefix type » is set to « None » or « Custom » and you have secrets with the same name in different folder the last value read will be set in the variable (erasing previus values).
+
 
   ## __Examples__
 
@@ -58,6 +59,47 @@
 
   There is now four variables called « APP1_DEV_key_1 », « APP1_DEV_key_2 », « APP2_DEV_key_1 », « APP2_DEV_key_2 » that you can used in your next tasks by using $(APP1_DEV_key_1), $(APP1_DEV_key_2), $(APP2_DEV_key_1), $(APP2_DEV_key_2).
 
+  ## Use output variables from the Service Connection
+
+  Here a YAML pipeline definition example showing how to use output variables:
+
+  ```yaml
+  stages:
+  - stage: 'Stage_A'
+    jobs:
+      - job: 'Job_A1'
+        steps:
+          - task: VaultReadKV@5
+            displayName: 'Vault - Read KV secrets '
+            inputs:
+              strAuthType: serviceConnection
+              serviceConnectionName: 'vault-dev'
+              exportServiceConnectionSettings: true
+              ignoreCertificateChecks: true
+              strKVEnginePath: ALM
+              strPrefixType: folder
+              replaceCR: true
+              strCRPrefix: '#{rn}#'
+          - bash: |
+              echo "url '$(VaultReadKV.url)'"
+              echo "username '$(VaultReadKV.username)'"
+              echo "password '$(VaultReadKV.password)'"
+            displayName: 'Check variables'
+  - stage: 'Stage_B'
+    dependsOn: Stage_A
+    jobs:
+      - job: 'Job_B1'
+        variables:
+          vaultUrl: $[stageDependencies.Stage_A.Job_A1.outputs['VaultReadKV.url']]
+          vaultUsername: $[stageDependencies.Stage_A.Job_A1.outputs['VaultReadKV.username']]
+          vaultPassword: $[stageDependencies.Stage_A.Job_A1.outputs['VaultReadKV.password']]
+        steps:
+          - bash: |
+              echo "url '$(vaultUrl)'"
+              echo "username '$(vaultUsername)'"
+              echo "password '$(vaultPassword)'"
+            displayName: 'Check variables'
+  ```
 
 - ### Tool - Create a File
 
@@ -97,6 +139,10 @@ Parameters :
 
 
 ## Release note
+
+### v5.1.0
+- Add the possibility to export Services Connexion settings as output variables.
+  Check [Use output variables from the Service Connection](#Use-output-variables-from-the-Service-Connection) for more details.
 
 ### v5.0.0
 - Add service connection « Vault Interaction »

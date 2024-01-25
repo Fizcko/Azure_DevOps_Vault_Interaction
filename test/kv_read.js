@@ -50,6 +50,14 @@ switch(strAuthType){
         tr.setInput("strUsername", conf.auth.userpass.strUsername);
         tr.setInput("strPassword", conf.auth.userpass.strPassword);
         break;
+	case "serviceConnection":
+		const endpointId = "VaultInteractionEndpoint"
+		tr.setInput("strAuthType", "serviceConnection");
+		tr.setInput("serviceConnectionName", endpointId);
+		tr.setInput("exportServiceConnectionSettings", conf.auth.serviceConnection.exportServiceConnectionSettings);
+		process.env['ENDPOINT_URL_' + endpointId] = conf.auth.serviceConnection.url;
+		process.env[`ENDPOINT_AUTH_${endpointId}`] = JSON.stringify({ parameters: {username: conf.auth.serviceConnection.username, password: conf.auth.serviceConnection.password, authType: conf.auth.serviceConnection.authType}})
+		break;
 }
 
 tr.setInput("strKVEnginePath", conf.kv_read.strKVEnginePath);

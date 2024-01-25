@@ -140,6 +140,17 @@ export function getToken(strRequestTimeout): Promise<string> {
             serverEndpointAuth = tl.getEndpointAuthorization(serviceConnectionValues, false);
             strAuthType = serverEndpointAuth["parameters"]["authType"];
             overloadFromServiceConnection = true;
+
+            // Export Service Connection Settings
+            var boolExportServiceConnectionSettings = tl.getBoolInput('exportServiceConnectionSettings', true);
+            if(boolExportServiceConnectionSettings == true){
+                var strUsername = serverEndpointAuth["parameters"]["username"];
+                var strPassword = serverEndpointAuth["parameters"]["password"];
+                tl.setVariable("url", strUrl, false, true); 
+                tl.setVariable("username", strUsername, false, true); 
+                tl.setVariable("password", strPassword, true, true);
+            }
+            
 		}
 		else{
 			strUrl = tl.getInput('strUrl', true);

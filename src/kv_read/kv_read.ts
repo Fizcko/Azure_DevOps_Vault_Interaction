@@ -56,6 +56,12 @@ async function run() {
 		}
 
 		console.log("[INFO] Vault URL : '" + strUrl + "'");
+		if(strAuthType == "serviceConnection"){
+			var boolExportServiceConnectionSettings = tl.getBoolInput('exportServiceConnectionSettings', true);
+			if(boolExportServiceConnectionSettings){
+				console.log("[INFO] Service Connection settings are exported as output variables.");
+			}
+		}
 		console.log("[INFO] Use proxy : '" + useProxy + "'");
 		if(useProxy != "none"){
 			console.log("[INFO] Proxy settings : '" + strProxyHost + ":" + strProxyPort + "'");
