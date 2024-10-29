@@ -140,6 +140,9 @@ Parameters :
 
 ## Release note
 
+### v5.2.0
+- Add execution for node 16 & node 20
+
 ### v5.1.0
 - Add the possibility to export Services Connection settings as output variables.
   Check [Use output variables from the Service Connection](#Use-output-variables-from-the-Service-Connection) for more details.

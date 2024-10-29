@@ -1,4 +1,5 @@
 {
+    "task_node_version": 20,
     "vault": {
         "url": "http://127.0.0.1:8200",
         "ignore_ssl": true,

@@ -12,7 +12,7 @@
     "author":  "Fizcko",
     "version":  {
                     "Major":  5,
-                    "Minor":  1,
+                    "Minor":  2,
                     "Patch":  0
                 },
     "instanceNameFormat":  "Vault - Read KV secrets",
@@ -330,6 +330,16 @@
                                      "target":  "kv_read.js",
                                      "argumentFormat":  "",
                                      "workingDirectory":  ""
-                                 }
+                                 },
+                      "Node16":  {
+                                     "target":  "kv_read.js",
+                                     "argumentFormat":  "",
+                                     "workingDirectory":  ""
+                                 },
+                      "Node20_1":  {
+                                       "target":  "kv_read.js",
+                                       "argumentFormat":  "",
+                                       "workingDirectory":  ""
+                                   }
                   }
 }
